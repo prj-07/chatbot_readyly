@@ -114,7 +114,7 @@ python-slugify==6.1.2
 pyttsx3==2.90
 pytz==2022.5
 pytz-deprecation-shim==0.1.0.post0
-pywin32==223
+
 pywinpty==2.0.7
 PyYAML==6.0
 pyzmq==23.2.1
