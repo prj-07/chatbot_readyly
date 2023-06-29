@@ -1,6 +1,10 @@
 import numpy as np
 import pandas as pd
 import pickle
+from sklearn.metrics.pairwise import cosine_similarity
+import openai
+import numpy as np
+from flask import Flask, request, jsonify
 # json_data = '''
 # [
 #   {
