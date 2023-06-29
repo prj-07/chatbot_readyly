@@ -24,8 +24,8 @@ def process_query():
     # query = "What is Readyly ?"
     # query = "How fast is Readyly ?"
     query = response.json()['query']
-    os.environ["OPENAI_API_KEY"] = "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"
-    openai.api_key = "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"
+  #  os.environ["OPENAI_API_KEY"] = "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"
+    #openai.api_key = "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"
     embedding_model = "text-embedding-ada-002"
     embedding_encoding = "cl100k_base"
     max_tokens = 1000
