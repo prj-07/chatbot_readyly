@@ -87,7 +87,8 @@ articles = df['content'].tolist()
 # train_embeddings =  get_sentence_embeding(articles)\
 df['context'] = df['title']+df['content']
 import os
-os.environ["OPENAI_API_KEY"] = "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"
+#os.environ["OPENAI_API_KEY"] = "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"
+openai.api_key = os.environ["OPENAI_API_KEY"]
 import  openai
 #openai.api_key = "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"
 from openai.embeddings_utils import get_embedding
