@@ -89,7 +89,7 @@ df['context'] = df['title']+df['content']
 import os
 os.environ["OPENAI_API_KEY"] = "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"
 import  openai
-openai.api_key = "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"
+#openai.api_key = "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"
 from openai.embeddings_utils import get_embedding
 embedding_model = "text-embedding-ada-002"
 embedding_encoding = "cl100k_base"  # this the encoding for text-embedding-ada-002
