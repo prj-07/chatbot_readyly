@@ -128,7 +128,9 @@ def process_query():
    # query = request.json['query']
     # query = "What is Readyly ?"
     # query = "How fast is Readyly ?"
-    query = response.json()['query']
+    #query = response.json()['query']
+    query = request.args.get('query')
+    #return query
     openai.api_key = os.environ["OPENAI_API_KEY"]
   #  os.environ["OPENAI_API_KEY"] = "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"
     #openai.api_key = "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"
@@ -141,6 +143,7 @@ def process_query():
         return openai.Embedding.create(input=[text], model=model)['data'][0]['embedding']
 
     query_embedding = get_embedding(query)
+    print(query)
 
     def find_most_similar(query_embedding):
         query_embedding = np.array(query_embedding)
