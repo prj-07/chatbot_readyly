@@ -1,3 +1,6 @@
+from openai.embeddings_utils import get_embedding
+import openai
+import os
 import numpy as np
 import pandas as pd
 import pickle
@@ -58,10 +61,9 @@ json_data = '''
 
 ]
 '''
-# cloud-based software platform benefits include: 
+# cloud-based software platform benefits include:
 
-#An AI-powered help center that responds to customers with 6x the accuracy of leading ticketing solutions. 
-
+# An AI-powered help center that responds to customers with 6x the accuracy of leading ticketing solutions.
 
 
 df = pd.read_json(json_data, orient='records')
@@ -85,24 +87,20 @@ articles = df['content'].tolist()
 #     return bert_encoder(preprocessed_text)['pooled_output']
 
 # get_sentence_embeding([
-#     "500$ discount. hurry up", 
+#     "500$ discount. hurry up",
 #     "Bhavin, are you up for a volleybal game tomorrow?"]
 # )
 # train_embeddings =  get_sentence_embeding(articles)\
 df['context'] = df['title']+df['content']
-import os
-import openai
-#os.environ["OPENAI_API_KEY"] = "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"
+# os.environ["OPENAI_API_KEY"] = "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"
 openai.api_key = os.environ["OPENAI_API_KEY"]
-import  openai
-#openai.api_key = "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"
-from openai.embeddings_utils import get_embedding
+# openai.api_key = "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"
 embedding_model = "text-embedding-ada-002"
 embedding_encoding = "cl100k_base"  # this the encoding for text-embedding-ada-002
 max_tokens = 1000  # the maximum for text-embedding-ada-002 is 8191
-df["embedding"] = df.context.apply(lambda x: get_embedding(x, engine=embedding_model))
+df["embedding"] = df.context.apply(
+    lambda x: get_embedding(x, engine=embedding_model))
 print(df)
-import pickle
 file_path = 'data.pkl'
 
 # Dump the DataFrame as a pickle file
@@ -118,22 +116,26 @@ app = Flask(__name__)
 # response = ''' [{"query":"what is Readyly ?"}]'''
 
 
-
-
-@app.route('/process_query', methods=['GET'])
+@app.route('/process_query', methods=['POST'])
 def process_query():
+    data = request.json
+    print(data)
+    query = data.get("query", "")
+    print(query)
+    # return jsonify(data)
+
     # print("response", response)
     # app.logger.info('Processing default request')
     # query = response.json()['query']
    # query = request.json['query']
     # query = "What is Readyly ?"
     # query = "How fast is Readyly ?"
-    #query = response.json()['query']
-    query = request.args.get('query')
-    #return query
+    # query = response.json()['query']
+    # query = request.args.get('query')
+    # return query
     openai.api_key = os.environ["OPENAI_API_KEY"]
   #  os.environ["OPENAI_API_KEY"] = "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"
-    #openai.api_key = "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"
+    # openai.api_key = "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"
     embedding_model = "text-embedding-ada-002"
     embedding_encoding = "cl100k_base"
     max_tokens = 1000
@@ -171,4 +173,6 @@ def process_query():
 
 
 if __name__ == '__main__':
-    app.run()    
+    app.run()
+
+  
